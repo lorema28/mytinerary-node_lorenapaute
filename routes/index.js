@@ -1,6 +1,9 @@
 import express from 'express';
 //el enrutador principal va llamar a todos los recursos y los va a enrutar
-import userRouter from './users.js'
+import userRouter from './users.js';
+import cityRouter from './cities.js';
+import itineraryRouter from './itineraries.js';
+import activitiesRouter from './activities.js';
 
 let router = express.Router();
 
@@ -12,8 +15,12 @@ router.get('/', function(req, res, next) {
 
 
 //obligo al enrutador principal a usar -las -rutas del enrutador del recurso user.
-router.use('/users',userRouter)
 //router.use acepta como minimo dos parametos para poder enrutar correctamente
 //1- la palabrita con la q se va a enrutar
 //2- el enrutador q tengo q conectar
+router.use('/users',userRouter);
+router.use('/cities', cityRouter);
+router.use('/itineraries', itineraryRouter);
+router.use('/activities', activitiesRouter);
+
 export default router

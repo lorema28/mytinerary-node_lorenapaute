@@ -2,25 +2,27 @@
 import app from '../app.js';              //configuración del servidor
 import debug from 'debug';                //modulo de debugeo 
 import http from 'http';                  //modulo para crear servidores HTTP
+import { connect } from 'mongoose';       //metodo para conectarme a la db
+
 // PORT
 //process.env guarda las configuraciones de las variables de entorno
-//variables muuuy delicadas que son necesarias proteger
+//varaibles muuuy delicadas que son necesarias proteger
 //se configuran con un modulo que se llama DOTENV
 let port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-//start serving
-
-let server = http.createServer(app);
-let ready = ()=> console.log('server ready on port'+port);
-server.listen(port,ready);
-
+// START SERVING
+let server = http.createServer(app);  //creo un servidor normalizado con HTTP
+let ready = ()=> {
+  console.log('server ready on port '+port);
+  //connect('link de conexion de mongo')
+  connect(process.env.LINK_DB)        //el método connect devuelve una promesa: trabajar con then-catch o async-await
+    .then(()=>console.log('database connected'))
+    .catch(err=>console.log(err))
+}
+server.listen(port,ready);            //con el metodo listen ESCUCHO el puerto para que empiece a funcionar (a levantarse)
 server.on('error', onError);
 server.on('listening', onListening);
-
-/**
- * Normalize a port into a number, string, or false.
- */
 
 function normalizePort(val) {
   let port = parseInt(val, 10);
@@ -37,11 +39,6 @@ function normalizePort(val) {
 
   return false;
 }
-
-/**
- * Event listener for HTTP server "error" event.
- */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -65,11 +62,6 @@ function onError(error) {
       throw error;
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
-
 function onListening() {
   let addr = server.address();
   let bind = typeof addr === 'string'
