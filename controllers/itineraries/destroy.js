@@ -11,7 +11,7 @@ export default async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: false,
-      message: "🤒 Itinerary not Deleted! 🤒"
+      message: " Itinerary not Deleted! "
     })
   }
 }

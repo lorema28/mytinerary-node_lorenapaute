@@ -12,7 +12,7 @@ export default async (req, res) => {
     console.log(error)
     return res.status(400).json({
       success: false,
-      message: "The Itinerary could not be created 😟",
+      message: "The Itinerary could not be created ",
       response: null
     })
   }

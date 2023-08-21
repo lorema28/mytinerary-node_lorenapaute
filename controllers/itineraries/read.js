@@ -11,7 +11,7 @@ export default async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       succes: false,
-      message: "😯 Itinerary not found",
+      message: "Itinerary not found",
       response: null
     })
   }
