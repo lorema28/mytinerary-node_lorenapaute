@@ -14,7 +14,7 @@ router.post('/', create)
 //READ
 router.get('/', read)
 router.get('/carousel', carousel)
-router.get('/:user_id', readOne)        //los endpoints que lleven params VAN SIEMPRE al final (para que no me detecte las palabritas como el parametro configurado)
+router.get('/:city_id', readOne)        //los endpoints que lleven params VAN SIEMPRE al final (para que no me detecte las palabritas como el parametro configurado)
 
 //UPDATE
 router.put('/:u_id', update)
