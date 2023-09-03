@@ -1,19 +1,15 @@
-import Itinerary from '../../models/Itinerary.js';
+import Itinerary from '../../models/Itinerary.js'
 
-export default async (req, res) => {
-  try {
-    let newItineray = await Itinerary.create(req.body);
-    return res.status(201).json({
-      success: true,
-      message: 'Itinerary created',
-      response: newItineray._id
-    })
-  } catch (error) {
-    console.log(error)
-    return res.status(400).json({
-      success: false,
-      message: "The Itinerary could not be created ",
-      response: null
-    })
-  }
+export default async (req,res,next)=> {
+    try {
+        let data = req.body
+        let one = await Itinerary.create(data)
+        return res.status(201).json({
+            success: true,
+            message: 'Itinerary created',
+            response: one._id
+        })
+    } catch (error) {
+        next(error)
+    }
 }
