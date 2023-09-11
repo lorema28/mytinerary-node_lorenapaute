@@ -1,4 +1,8 @@
 import express from 'express';
+
+import passport from '../middlewares/passport.js';
+import updatePassHash from '../middlewares/updatePassHash.js'
+
 import create from '../controllers/users/create.js';
 import read from '../controllers/users/read.js'
 import readOne from '../controllers/users/readOne.js';
@@ -29,7 +33,9 @@ router.get('/:user_id', readOne)
 //EJEMPLO: aca y en controller ignaId
 
 //UPDATE
-router.put('/:u_id', update)
+router.put('/', passport.authenticate("jwt",{ session:false }), updatePassHash, update)
+//passport INYECTA al objeto de requermientos los datos del usuario en la propiedad USER
+//de manera que en req.user tengo los datos del usuario
 
 //DESTROY
 router.delete('/:id', destroy)
