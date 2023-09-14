@@ -12,7 +12,11 @@ let schema = new Schema({
     mail: { type:String,required:true,unique:true },    //unique:true comprueba que el mail SEA UNICO (no hay mails duplicados)
     photo: { type:String,default:"https://www.cinemascomics.com/wp-content/uploads/2020/06/poder-darth-vader.jpg",required:false },    //default vuelve al parametro OPCIONAL, en caso que el cliente mande la foto, la usa, sino: USA LA FOTO DEFAULT (DARTH VADER)
     password: { type:String,required:true },
-    country: { type:String,required:true }
+    country: { type:String,required:true },
+    google: { type: Boolean, default: false },
+},
+{
+  timestamps: true,
 })
 //para crear un modelo de datos utilizo el metodo model
 //pasando como parametros DONDE tengo que crear los documentos y con que FORMA

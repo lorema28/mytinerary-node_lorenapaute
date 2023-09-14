@@ -5,6 +5,10 @@ import register from "../controllers/auth/register.js";
 import signin from "../controllers/auth/signin.js";
 import token from "../controllers/auth/token.js";
 import signout from "../controllers/auth/signout.js";
+import google from "../controllers/auth/google.js";
+
+import findOrCreate from "../middlewares/findOrCreate.js";
+import verifyGoogle from "../middlewares/verifyGoogle.js";
 
 import isValidToken from "../middlewares/isValidToken.js";
 import isPassOk from "../middlewares/isPassOk.js";
@@ -51,5 +55,7 @@ authRouter.post(
   passport.authenticate("jwt", { session: false }),
   signout
 );
+
+authRouter.post("/google", verifyGoogle, findOrCreate, isValidToken, google);
 
 export default authRouter;
